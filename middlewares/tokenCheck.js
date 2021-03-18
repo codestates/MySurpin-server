@@ -1,30 +1,33 @@
-const jwt = require('jsonwebtoken');
-const { User } = require('../models');
+const jwt = require("jsonwebtoken");
+const { User } = require("../models");
 const TOKEN_EXPIRED = -3;
 const TOKEN_INVALID = -2;
 
 module.exports = async (req, res, next) => {
-  const {authorization} = req.headers;
-  const {email} = req.body;
+  const { authorization } = req.headers;
+  const { email } = req.body;
 
-  if(!authorization){
-    return res.status(400).json({message:"Token is not exists!"});
+  if (!authorization) {
+    return res.status(400).json({ message: "Token is not exists!" });
   }
-  if(!email) {
-    return res.status(400).json({message:"Unsufficient info"});
+  if (!email) {
+    return res.status(400).json({ message: "Unsufficient info" });
   }
 
-  const bearer = authorization.split(' ');
+  const bearer = authorization.split(" ");
 
-  if(bearer[0] === "Bearer"){
-    const authData = await jwt.verify(bearer[1] , process.env.ACCESS_SECRET);
+  if (bearer[0] === "Bearer") {
+    const authData = await jwt.verify(bearer[1], process.env.ACCESS_SECRET);
 
-    if(authData === TOKEN_EXPIRED){             //token expired
-      return res.status(401).json({message:"Expired token"});
-    } else if(authData === TOKEN_INVALID){      //token invalid
-      return res.status(401).json({message:"Invalid token"});
-    } else if(authData.nickname === undefined){ //not our token format
-      return res.status(401).json({message:"Incorrect token"});
+    if (authData === TOKEN_EXPIRED) {
+      //token expired
+      return res.status(401).json({ message: "Expired token" });
+    } else if (authData === TOKEN_INVALID) {
+      //token invalid
+      return res.status(401).json({ message: "Invalid token" });
+    } else if (authData.nickname === undefined) {
+      //not our token format
+      return res.status(401).json({ message: "Incorrect token" });
     }
 
     //query to db with email from request
@@ -33,17 +36,16 @@ module.exports = async (req, res, next) => {
     //if not matched response error code.
     const userInfo = await User.findOne({
       where: {
-        email
-      }
+        email,
+      },
     });
 
-    if(userInfo && userInfo.nickname === authData.nickname){
+    if (userInfo && userInfo.nickname === authData.nickname) {
       next();
     } else {
-      return res.status(403).json({message:"Unauthorized"});
+      return res.status(403).json({ message: "Unauthorized" });
     }
-
   } else {
-    return res.status(400).json({message:"Bearer is not exists!"});
+    return res.status(400).json({ message: "Bearer is not exists!" });
   }
 };

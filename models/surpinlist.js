@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class SurpinList extends Model {
     /**
@@ -11,28 +9,31 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.SurpinList.hasMany(models.SavedUser,{
-        foreignKey: 'listId'
+      models.SurpinList.hasMany(models.SavedUser, {
+        foreignKey: "listId",
       });
-      models.SurpinList.hasMany(models.SurpinUrls,{
-        foreignKey: 'listId'
+      models.SurpinList.hasMany(models.SurpinUrls, {
+        foreignKey: "listId",
       });
-      models.SurpinList.hasMany(models.SurpinList_Tags,{
-        foreignKey: 'listId'
+      models.SurpinList.hasMany(models.SurpinList_Tags, {
+        foreignKey: "listId",
       });
-      models.SurpinList.belongsTo(models.User,{
-        foreignKey: 'userId'
+      models.SurpinList.belongsTo(models.User, {
+        foreignKey: "userId",
       });
     }
-  };
-  SurpinList.init({
-    title: DataTypes.STRING,
-    desc: DataTypes.STRING,
-    userId: DataTypes.INTEGER,
-    thumbnail: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'SurpinList',
-  });
+  }
+  SurpinList.init(
+    {
+      title: DataTypes.STRING,
+      desc: DataTypes.STRING,
+      userId: DataTypes.INTEGER,
+      thumbnail: DataTypes.STRING,
+    },
+    {
+      sequelize,
+      modelName: "SurpinList",
+    }
+  );
   return SurpinList;
 };
