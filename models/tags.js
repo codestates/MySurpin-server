@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.Tags.hasMany(models.SurpinList_Tags, {
+      models.Tags.hasMany(models.Surpin_Tags, {
         foreignKey: "tagsId",
       });
     }

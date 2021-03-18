@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.SurpinUrls.belongsTo(models.SurpinList, {
+      models.SurpinUrls.belongsTo(models.Surpin, {
         foreignKey: "listId",
       });
     }

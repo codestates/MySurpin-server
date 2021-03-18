@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       models.User.hasMany(models.SavedUser, {
         foreignKey: "userId",
       });
-      models.User.hasMany(models.SurpinList, {
+      models.User.hasMany(models.Surpin, {
         foreignKey: "userId",
       });
     }
