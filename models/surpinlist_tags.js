@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class SurpinList_Tags extends Model {
     /**
@@ -11,20 +9,23 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.SurpinList_Tags.belongsTo(models.SurpinList,{
-        foreignKey: 'listId'
+      models.SurpinList_Tags.belongsTo(models.SurpinList, {
+        foreignKey: "listId",
       });
-      models.SurpinList_Tags.belongsTo(models.Tags,{
-        foreignKey: 'tagsId'
+      models.SurpinList_Tags.belongsTo(models.Tags, {
+        foreignKey: "tagsId",
       });
     }
-  };
-  SurpinList_Tags.init({
-    tagsId: DataTypes.INTEGER,
-    listId: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'SurpinList_Tags',
-  });
+  }
+  SurpinList_Tags.init(
+    {
+      tagsId: DataTypes.INTEGER,
+      listId: DataTypes.INTEGER,
+    },
+    {
+      sequelize,
+      modelName: "SurpinList_Tags",
+    }
+  );
   return SurpinList_Tags;
 };
