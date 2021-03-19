@@ -1,3 +1,3 @@
-const { Surpin } = require("../../models");
-
-module.exports = async (req, res) => {};
+module.exports = async (req, res) => {
+  res.status(500).send();
+};
