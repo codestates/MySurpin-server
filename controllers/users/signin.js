@@ -10,8 +10,8 @@ module.exports = async (req, res) => {
   });
 
   if (userInfo) {
+    console.log(userInfo);
     const data = userInfo;
-
     const accessToken = jwt.sign(
       { nickname: data.nickname },
       process.env.ACCESS_SECRET,
