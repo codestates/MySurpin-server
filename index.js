@@ -18,13 +18,17 @@ app.use(
 );
 
 //express 라우팅
-const usersRouter = require("./routes/users");
+const userRouter = require("./routes/users");
+const surpinRouter = require("./routes/surpin");
+const tagRouter = require("./routes/tag");
 app.get("/", (req, res) => {
   res.send("MySurpin server connected");
 });
-app.use("/user", usersRouter);
+app.use("/user", userRouter);
+app.use("/surpin", surpinRouter);
+app.use("/tag", tagRouter);
 
-//HTTPS 서버 여는 코드
+// HTTPS 서버 여는 코드
 const ca = fs.readFileSync(process.env.SSL_CA);
 const key = fs.readFileSync(process.env.SSL_PRIVATE);
 const cert = fs.readFileSync(process.env.SSL_CERT);

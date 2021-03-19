@@ -1,5 +1,5 @@
 const getSrupinLists = require("../../utils/getSurpinLists");
-const { User, Surpin, Surpin_Tags, Tags, sequelize } = require("../../models");
+const { User } = require("../../models");
 
 module.exports = async (req, res) => {
   try {
@@ -22,23 +22,6 @@ module.exports = async (req, res) => {
       res.status(404).json({ message: "Non exists user" });
     } else {
       //사용자가 가지고 있는 모든 태그를 담는 구문
-      const userTags = await Surpin_Tags.findAll({
-        attributes: [
-          [sequelize.col("Tag.name"), "tagName"],
-          [sequelize.fn("COUNT", "listId"), "count"],
-        ],
-        include: [
-          {
-            model: Surpin,
-            attributes: [],
-            required: true,
-            where: { userId: rows[0].id },
-          },
-          { model: Tags, attributes: [], required: true },
-        ],
-        group: "tagsId",
-      });
-
       if (tag) {
         tagOption.name = tag;
       }
@@ -50,7 +33,6 @@ module.exports = async (req, res) => {
           tagOption
         )),
         isValid: nickname === (req.isValid ? req.isValid.nickname : false),
-        userTags,
       });
     }
   } catch (err) {
