@@ -1,4 +1,4 @@
-const getSrupinLists = require("../../utils/getSurpins");
+const getSrupinLists = require("../../utils/getSurpinLists");
 
 module.exports = async (req, res) => {
   try {
