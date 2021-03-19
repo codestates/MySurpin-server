@@ -1,4 +1,4 @@
-const getSrupinLists = require("../../utils/getSurpins");
+const getSrupinLists = require("../../utils/getSurpinLists");
 const { User, Surpin, Surpin_Tags, Tags, sequelize } = require("../../models");
 
 module.exports = async (req, res) => {
