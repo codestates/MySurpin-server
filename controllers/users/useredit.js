@@ -11,6 +11,7 @@ module.exports = async (req, res) => {
   if (password) updateValue.password = password;
   if (nickname) updateValue.nickname = nickname;
   try {
+
     await User.update(updateValue, {
       where: {
         email,

@@ -10,7 +10,7 @@ router.get("/searchlists", controller.searchLists);
 router.get("/showuserLists/", tokenCheckForSurpin, controller.showUserLists);
 router.get("/showsurpin", tokenCheckForSurpin, controller.showSurpin);
 router.post("/createmysurpin", tokenCheckForSurpin, controller.createMySurpin);
-router.put("/editmysurpin", tokenCheckForSurpin, controller.editMySurpin);
+router.patch("/editmysurpin", tokenCheckForSurpin, controller.editMySurpin);
 router.delete(
   "/removemysurpin",
   tokenCheckForSurpin,
