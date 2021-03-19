@@ -16,11 +16,15 @@ app.use(
 );
 
 //express 라우팅
-const usersRouter = require("./routes/users");
+const userRouter = require("./routes/users");
+const surpinRouter = require("./routes/surpin");
+const tagRouter = require("./routes/tag");
 app.get("/", (req, res) => {
   res.send("MySurpin server connected");
 });
-app.use("/user", usersRouter);
+app.use("/user", userRouter);
+app.use("/surpin", surpinRouter);
+app.use("/tag", tagRouter);
 
 app.listen(4000, () => {
   console.log("server working now on localhost:4000");
