@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
       order: [[sequelize.col("contentsCount"), "DESC"]],
       include: [{ model: Tags, attributes: [], required: true }],
       where: sequelize.where(sequelize.col("Tag.name"), {
-        [Sequelize.Op.like]: `%${inputText}%`,
+        [Sequelize.Op.like]: `${inputText}%`,
       }),
       limit: 5,
     });

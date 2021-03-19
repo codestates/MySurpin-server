@@ -18,7 +18,7 @@ module.exports = async (req, res) => {
       { expiresIn: "1H" }
     );
 
-    res.status(200).json({ accessToken });
+    res.status(200).json({ accessToken, nickname: data.nickname });
   } else {
     res.status(401).json({ message: "Invalid user or Wrong password" });
   }

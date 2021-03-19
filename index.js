@@ -12,7 +12,7 @@ app.use(cookieParser());
 app.use(
   cors({
     origin: "https://www.mysurpin.com",
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
     credentials: true,
   })
 );
