@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       models.SavedUser.belongsTo(models.User, {
         foreignKey: "userId",
       });
-      models.SavedUser.belongsTo(models.SurpinList, {
+      models.SavedUser.belongsTo(models.Surpin, {
         foreignKey: "listId",
       });
     }

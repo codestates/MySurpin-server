@@ -23,18 +23,18 @@ module.exports = {
     await queryInterface.addConstraint("SavedUsers", {
       fields: ["listId"],
       type: "foreign key",
-      name: "fk_SavedUsers_SurpinList",
+      name: "fk_SavedUsers_Surpin",
       references: {
-        table: "SurpinLists",
+        table: "Surpins",
         field: "id",
       },
       onDelete: "cascade",
       onUpdate: "cascade",
     });
-    await queryInterface.addConstraint("SurpinLists", {
+    await queryInterface.addConstraint("Surpins", {
       fields: ["userId"],
       type: "foreign key",
-      name: "fk_SurpinLists_Users",
+      name: "fk_Surpins_Users",
       references: {
         table: "Users",
         field: "id",
@@ -45,29 +45,29 @@ module.exports = {
     await queryInterface.addConstraint("SurpinUrls", {
       fields: ["listId"],
       type: "foreign key",
-      name: "fk_SurpinUrls_SurpinLists",
+      name: "fk_SurpinUrls_Surpins",
       references: {
-        table: "SurpinLists",
+        table: "Surpins",
         field: "id",
       },
       onDelete: "cascade",
       onUpdate: "cascade",
     });
-    await queryInterface.addConstraint("SurpinList_Tags", {
+    await queryInterface.addConstraint("Surpin_Tags", {
       fields: ["listId"],
       type: "foreign key",
-      name: "fk_SurpinList_Tags_SurpinLists",
+      name: "fk_Surpin_Tags_Surpins",
       references: {
-        table: "SurpinLists",
+        table: "Surpins",
         field: "id",
       },
       onDelete: "cascade",
       onUpdate: "cascade",
     });
-    await queryInterface.addConstraint("SurpinList_Tags", {
+    await queryInterface.addConstraint("Surpin_Tags", {
       fields: ["tagsId"],
       type: "foreign key",
-      name: "fk_SurpinList_Tags_Tags",
+      name: "fk_Surpin_Tags_Tags",
       references: {
         table: "Tags",
         field: "id",
@@ -91,27 +91,23 @@ module.exports = {
     );
     await queryInterface.removeConstraint(
       "SavedUsers",
-      "fk_SavedUsers_SurpinList",
+      "fk_SavedUsers_Surpin",
       {}
     );
-    await queryInterface.removeConstraint(
-      "SurpinLists",
-      "fk_SurpinLists_Users",
-      {}
-    );
+    await queryInterface.removeConstraint("Surpins", "fk_Surpins_Users", {});
     await queryInterface.removeConstraint(
       "SurpinUrls",
-      "fk_SurpinUrls_SurpinLists",
+      "fk_SurpinUrls_Surpins",
       {}
     );
     await queryInterface.removeConstraint(
-      "SurpinList_Tags",
-      "fk_SurpinList_Tags_SurpinLists",
+      "Surpin_Tags",
+      "fk_Surpin_Tags_Surpins",
       {}
     );
     await queryInterface.removeConstraint(
-      "SurpinList_Tags",
-      "fk_SurpinList_Tags_Tags",
+      "Surpin_Tags",
+      "fk_Surpin_Tags_Tags",
       {}
     );
   },

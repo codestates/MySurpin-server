@@ -1,7 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class SurpinList_Tags extends Model {
+  class Surpin_Tags extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -9,23 +9,23 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.SurpinList_Tags.belongsTo(models.SurpinList, {
+      models.Surpin_Tags.belongsTo(models.Surpin, {
         foreignKey: "listId",
       });
-      models.SurpinList_Tags.belongsTo(models.Tags, {
+      models.Surpin_Tags.belongsTo(models.Tags, {
         foreignKey: "tagsId",
       });
     }
   }
-  SurpinList_Tags.init(
+  Surpin_Tags.init(
     {
       tagsId: DataTypes.INTEGER,
       listId: DataTypes.INTEGER,
     },
     {
       sequelize,
-      modelName: "SurpinList_Tags",
+      modelName: "Surpin_Tags",
     }
   );
-  return SurpinList_Tags;
+  return Surpin_Tags;
 };
