@@ -43,9 +43,15 @@ module.exports = async (req, res) => {
           where: sequelize.where(sequelize.col("Tag.name"), tag),
           group: ["tagsId"],
         });
-        searchOptions.id = {
-          [Sequelize.Op.in]: target[0].dataValues.surpinIDs,
-        };
+
+        if (target.length > 0) {
+          searchOptions.id = {
+            [Sequelize.Op.in]: target[0].dataValues.surpinIDs,
+          };
+        } else {
+          res.status(400).json({ message: "wrong tag name!" });
+          return;
+        }
       }
 
       res.json({
