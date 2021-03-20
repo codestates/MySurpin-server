@@ -26,21 +26,30 @@ module.exports = async (req, res) => {
       //없거나 2명 이상이 조회되는 경우
       res.status(404).json({ message: "Non exists user" });
     } else {
+      const searchOptions = {
+        userId: rows[0].id,
+      };
+
       //tag를 이용해 해당 태그를 사용하는 listId를 가져온다.
-      const target = await Surpin_Tags.findAll({
-        attributes: [
-          [sequelize.fn("JSON_ARRAYAGG", sequelize.col("listId")), "surpinIDs"],
-        ],
-        include: [{ model: Tags, attributes: [], required: true }],
-        where: sequelize.where(sequelize.col("Tag.name"), tag),
-        group: ["tagsId"],
-      });
+      if (tag) {
+        const target = await Surpin_Tags.findAll({
+          attributes: [
+            [
+              sequelize.fn("JSON_ARRAYAGG", sequelize.col("listId")),
+              "surpinIDs",
+            ],
+          ],
+          include: [{ model: Tags, attributes: [], required: true }],
+          where: sequelize.where(sequelize.col("Tag.name"), tag),
+          group: ["tagsId"],
+        });
+        searchOptions.id = {
+          [Sequelize.Op.in]: target[0].dataValues.surpinIDs,
+        };
+      }
 
       res.json({
-        ...(await getSrupinLists(offset, 10, {
-          userId: rows[0].id,
-          id: { [Sequelize.Op.in]: target[0].dataValues.surpinIDs },
-        })),
+        ...(await getSrupinLists(offset, 10, searchOptions)),
         isValid: nickname === (req.isValid ? req.isValid.nickname : false),
       });
     }
