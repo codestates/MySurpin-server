@@ -11,11 +11,7 @@ module.exports = async (
   offset,
   surpinCountPerPage,
   options = {},
-  tagSelect = "",
-  SurpinOrder = {
-    name: "createdAt",
-    order: "DESC",
-  }
+  SurpinOrder = [["createdAt", "DESC"]]
 ) => {
   let { count, rows: surpins } = await Surpin.findAndCountAll({
     attributes: [
@@ -29,7 +25,7 @@ module.exports = async (
       "createdAt",
       "updatedAt",
       [
-        sequelize.fn("GROUP_CONCAT", sequelize.col("Surpin_Tags->Tag.name")),
+        sequelize.fn("JSON_ARRAYAGG", sequelize.col("Surpin_Tags->Tag.name")),
         "tags",
       ],
     ],
@@ -45,7 +41,6 @@ module.exports = async (
             model: Tags,
             required: true,
             attributes: [],
-            // where: tagSelect, //태그 선택 where만 적용
           },
         ],
       },
@@ -55,10 +50,8 @@ module.exports = async (
     group: ["Surpin_Tags.listId"],
     offset,
     limit: surpinCountPerPage,
-    order: [[sequelize.col(SurpinOrder.name), SurpinOrder.order]], //orderby 설정 기본값은 createdAt을 DESC로 정렬
+    order: SurpinOrder, //orderby 설정 기본값은 createdAt을 DESC로 정렬
   });
-  [].map.call(surpins, (v) => {
-    v.dataValues.tags = v.dataValues.tags.split(",");
-  });
+
   return { surpinCount: count.length, surpinCountPerPage, surpins };
 };
