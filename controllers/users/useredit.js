@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
       },
     });
 
-    if (nickname) userInfo.updateNickname(nickname);
+    if (nickname) userInfo.nickname = nickname;
     if (password) userInfo.updatePassword(password);
 
     //always return new accessToken
@@ -24,7 +24,7 @@ module.exports = async (req, res) => {
       { expiresIn: "1H" }
     );
 
-    userInfo.updateToken(accessToken);
+    userInfo.token = accessToken;
     await userInfo.save();
 
     res.status(200).json({ accessToken });

@@ -36,11 +36,11 @@ module.exports = async (req, res, next) => {
       if (
         userInfo &&
         userInfo.nickname === authData.nickname &&
-        userInfo.validToken(bearer[1])
+        userInfo.token === bearer[1]
       ) {
         next();
         return;
-      } else if (userInfo.validToken(bearer[1])) {
+      } else if (userInfo.token !== bearer[1]) {
         return res.status(403).json({ message: "Expired token" });
       } else {
         return res.status(403).json({ message: "Unauthorized" });

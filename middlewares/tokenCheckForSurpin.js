@@ -36,7 +36,7 @@ module.exports = async (req, res, next) => {
       if (
         userInfo &&
         userInfo.nickname === authData.nickname &&
-        userInfo.validToken(bearer[1])
+        userInfo.token === bearer[1]
       ) {
         //접근 권한이 있는 회원의 접근
         req.isValid = {
@@ -45,7 +45,7 @@ module.exports = async (req, res, next) => {
         };
         next();
         return;
-      } else if (userInfo.validToken(bearer[1])) {
+      } else if (userInfo.token !== bearer[1]) {
         return res.status(403).json({ message: "Expired token" });
       } else {
         //사용자 정보가 없는 경우 혹은 인증정보가 다른 경우 =>

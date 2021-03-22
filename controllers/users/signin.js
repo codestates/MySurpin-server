@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
       { expiresIn: "1H" }
     );
 
-    userInfo.updateToken(accessToken);
+    userInfo.token = accessToken;
     await userInfo.save();
 
     res.status(200).json({ accessToken, nickname: data.nickname });
