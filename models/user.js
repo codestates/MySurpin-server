@@ -3,21 +3,11 @@ const { Model } = require("sequelize");
 const bcrypt = require("bcrypt");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    updateToken(token) {
-      this.token = bcrypt.hashSync(token, 10);
-    }
     updatePassword(password) {
       this.password = bcrypt.hashSync(password.toString(), 10);
     }
-    updateNickname(nickname) {
-      this.nickname = nickname;
-    }
-
     validPassword(password) {
       return bcrypt.compareSync(password.toString(), this.password);
-    }
-    validToken(token) {
-      return bcrypt.compareSync(token, this.token);
     }
     /**
      * Helper method for defining associations.
