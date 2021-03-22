@@ -7,28 +7,25 @@ module.exports = async (req, res) => {
     res.status(400).json({ message: "Unsufficient info" });
   }
 
-  const updateValue = {};
-  if (password) updateValue.password = password;
-  if (nickname) updateValue.nickname = nickname;
   try {
-    await User.update(updateValue, {
-      where: {
-        email,
-      },
-    });
-
     const userInfo = await User.findOne({
       where: {
         email,
       },
     });
 
-    //if nickname was changed then return new access token.
+    if (nickname) userInfo.updateNickname(nickname);
+    if (password) userInfo.updatePassword(password);
+
+    //always return new accessToken
     const accessToken = jwt.sign(
       { nickname: userInfo.nickname },
       process.env.ACCESS_SECRET,
       { expiresIn: "1H" }
     );
+
+    userInfo.updateToken(accessToken);
+    await userInfo.save();
 
     res.status(200).json({ accessToken });
   } catch (err) {
