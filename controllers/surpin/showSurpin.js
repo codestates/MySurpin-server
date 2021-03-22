@@ -21,6 +21,7 @@ module.exports = async (req, res) => {
       );
 
       const urls = await SurpinUrls.findAll({
+        attributes: ["name", "url"],
         where: { listId },
         raw: true,
         transaction: t,
@@ -31,8 +32,7 @@ module.exports = async (req, res) => {
         isValid,
         urls: urls.map((url) => {
           return {
-            urlName: url.name,
-            url: url.url,
+            ...url,
           };
         }),
       });
