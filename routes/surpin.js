@@ -8,7 +8,7 @@ router.post("/newlists", controller.newLists);
 router.get("/besttags", controller.bestTags);
 router.post("/searchlists", controller.searchLists);
 router.post("/showuserLists/", tokenCheckForSurpin, controller.showUserLists);
-router.post("/showsurpin", tokenCheckForSurpin, controller.showSurpin);
+router.post("/showsurpin/", tokenCheckForSurpin, controller.showSurpin);
 router.post("/createmysurpin", tokenCheckForSurpin, controller.createMySurpin);
 router.patch("/editmysurpin", tokenCheckForSurpin, controller.editMySurpin);
 router.delete(

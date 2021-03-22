@@ -2,6 +2,8 @@ const getSrupinLists = require("../../utils/getSurpinLists");
 const { Surpin_Tags, Tags, sequelize, Sequelize } = require("../../models");
 
 module.exports = async (req, res) => {
+  console.log("-------search list---------");
+  console.log(req.body);
   try {
     const { pagenumber, tag } = req.body;
     const offset = ((pagenumber || 1) - 1) * 10;
@@ -17,6 +19,9 @@ module.exports = async (req, res) => {
         group: ["tagsId"],
       });
 
+      if (target.length === 0) {
+        return res.status(400).json({ message: "No surpin with request tag" });
+      }
       //가져온 listId를 이용하여 일반목록, 순위검색을 해서 가져온다.
       res.json({
         ...(await getSrupinLists(offset, 10, {

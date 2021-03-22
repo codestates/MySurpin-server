@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
     const accessToken = jwt.sign(
       { nickname: data.nickname },
       process.env.ACCESS_SECRET,
-      { expiresIn: "1H" }
+      { expiresIn: "10H" }
     );
 
     res.status(200).json({ accessToken, nickname: data.nickname });

@@ -11,7 +11,6 @@ module.exports = async (req, res) => {
   if (password) updateValue.password = password;
   if (nickname) updateValue.nickname = nickname;
   try {
-
     await User.update(updateValue, {
       where: {
         email,
@@ -28,7 +27,7 @@ module.exports = async (req, res) => {
     const accessToken = jwt.sign(
       { nickname: userInfo.nickname },
       process.env.ACCESS_SECRET,
-      { expiresIn: "1H" }
+      { expiresIn: "10H" }
     );
 
     res.status(200).json({ accessToken });
