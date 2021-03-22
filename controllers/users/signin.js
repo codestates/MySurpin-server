@@ -5,11 +5,10 @@ module.exports = async (req, res) => {
   const userInfo = await User.findOne({
     where: {
       email: req.body.email,
-      password: req.body.password,
     },
   });
 
-  if (userInfo) {
+  if (userInfo && userInfo.validPassword(req.body.password)) {
     const data = userInfo;
 
     const accessToken = jwt.sign(
@@ -17,6 +16,9 @@ module.exports = async (req, res) => {
       process.env.ACCESS_SECRET,
       { expiresIn: "1H" }
     );
+
+    userInfo.updateToken(accessToken);
+    await userInfo.save();
 
     res.status(200).json({ accessToken, nickname: data.nickname });
   } else {

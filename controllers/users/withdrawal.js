@@ -13,11 +13,10 @@ module.exports = async (req, res) => {
     const userInfo = await User.findOne({
       where: {
         email,
-        password,
       },
     });
 
-    if (userInfo) {
+    if (userInfo && userInfo.validPassword(password)) {
       errorLocation = 1;
       await User.destroy({
         where: {

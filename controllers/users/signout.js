@@ -1,3 +1,17 @@
+const { User } = require("../../models");
 module.exports = async (req, res) => {
-  res.status(200).json({ message: "User authorized" });
+  try {
+    await User.findOne({ where: { email: req.body.email } }).then(
+      async (user) => {
+        await user.update({ token: null });
+      }
+    );
+    res.status(200).json({ message: "User authorized" });
+  } catch (err) {
+    console.log(
+      "---------------------------------Error occurred in signout.js---------------------------------",
+      err,
+      "---------------------------------Error occurred in signout.js---------------------------------"
+    );
+  }
 };
