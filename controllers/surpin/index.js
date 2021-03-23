@@ -7,4 +7,5 @@ module.exports = {
   searchLists: require("./searchLists"),
   showSurpin: require("./showSurpin"),
   showUserLists: require("./showUserLists"),
+  showUrlTitle: require("./showUrlTitle"),
 };

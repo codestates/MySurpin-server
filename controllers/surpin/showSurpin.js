@@ -1,7 +1,6 @@
 const { SurpinUrls, Surpin, sequelize } = require("../../models");
 
 module.exports = async (req, res) => {
-  console.log("-----------showsurpin--------");
   const { listId } = req.query;
   if (!listId) {
     return res.status(400).json({ message: "Unsufficient info" });
@@ -11,7 +10,6 @@ module.exports = async (req, res) => {
   }
 
   try {
-    console.log("-----------showsurpin--------");
     await sequelize.transaction(async (t) => {
       let isValid = false;
       await Surpin.findOne({
@@ -23,6 +21,7 @@ module.exports = async (req, res) => {
       );
 
       const urls = await SurpinUrls.findAll({
+        attributes: ["name", "url"],
         where: { listId },
         raw: true,
         transaction: t,
@@ -33,8 +32,7 @@ module.exports = async (req, res) => {
         isValid,
         urls: urls.map((url) => {
           return {
-            name: url.name,
-            url: url.url,
+            ...url,
           };
         }),
       });

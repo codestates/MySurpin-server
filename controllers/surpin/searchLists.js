@@ -19,26 +19,27 @@ module.exports = async (req, res) => {
         group: ["tagsId"],
       });
 
-      if (target.length === 0) {
-        return res.status(400).json({ message: "No surpin with request tag" });
+      if (target.length > 0) {
+        //가져온 listId를 이용하여 일반목록, 순위검색을 해서 가져온다.
+        res.json({
+          ...(await getSrupinLists(offset, 10, {
+            id: { [Sequelize.Op.in]: target[0].dataValues.surpinIDs },
+          })),
+          top: (
+            await getSrupinLists(
+              0,
+              10,
+              { id: { [Sequelize.Op.in]: target[0].dataValues.surpinIDs } },
+              [
+                ["savedCount", "DESC"],
+                ["createdAt", "DESC"],
+              ]
+            )
+          ).surpins,
+        });
+      } else {
+        res.status(400).json({ message: "No surpin with request tag" });
       }
-      //가져온 listId를 이용하여 일반목록, 순위검색을 해서 가져온다.
-      res.json({
-        ...(await getSrupinLists(offset, 10, {
-          id: { [Sequelize.Op.in]: target[0].dataValues.surpinIDs },
-        })),
-        top: (
-          await getSrupinLists(
-            0,
-            10,
-            { id: { [Sequelize.Op.in]: target[0].dataValues.surpinIDs } },
-            [
-              ["savedCount", "DESC"],
-              ["createdAt", "DESC"],
-            ]
-          )
-        ).surpins,
-      });
     } else {
       res.status(400).json({ message: "Unsufficient info" });
     }

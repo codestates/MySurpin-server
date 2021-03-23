@@ -3,7 +3,7 @@ const { Op } = require("sequelize");
 
 module.exports = async (req, res) => {
   const { email, password, nickname } = req.body;
-  console.log(req.body);
+  // console.log(req.body);
 
   const userInfo = await User.findOne({
     where: {
