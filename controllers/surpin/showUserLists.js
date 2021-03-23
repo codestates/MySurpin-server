@@ -61,10 +61,8 @@ module.exports = async (req, res) => {
     }
   } catch (err) {
     console.log(
-      "---------------------------------Error occurred in showUserLists.js---------------------------------"
-    );
-    console.log(err);
-    console.log(
+      "---------------------------------Error occurred in showUserLists.js---------------------------------",
+      err,
       "---------------------------------Error occurred in showUserLists.js---------------------------------"
     );
     res.status(500).send();

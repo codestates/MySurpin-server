@@ -27,10 +27,8 @@ module.exports = async (req, res) => {
     });
   } catch (err) {
     console.log(
-      "---------------------------------Error occurred in removeMySurpin.js---------------------------------"
-    );
-    console.log(err);
-    console.log(
+      "---------------------------------Error occurred in removeMySurpin.js---------------------------------",
+      err,
       "---------------------------------Error occurred in removeMySurpin.js---------------------------------"
     );
     if (err instanceof errorMessage) {

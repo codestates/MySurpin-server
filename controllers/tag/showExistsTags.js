@@ -28,10 +28,8 @@ module.exports = async (req, res) => {
     });
   } catch (err) {
     console.log(
-      "---------------------------------Error occurred in showExistsTags.js---------------------------------"
-    );
-    console.log(err);
-    console.log(
+      "---------------------------------Error occurred in showExistsTags.js---------------------------------",
+      err,
       "---------------------------------Error occurred in showExistsTags.js---------------------------------"
     );
     res.status(500).send();

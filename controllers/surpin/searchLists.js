@@ -45,10 +45,8 @@ module.exports = async (req, res) => {
     }
   } catch (err) {
     console.log(
-      "---------------------------------Error occurred in searchLists.js---------------------------------"
-    );
-    console.log(err);
-    console.log(
+      "---------------------------------Error occurred in searchLists.js---------------------------------",
+      err,
       "---------------------------------Error occurred in searchLists.js---------------------------------"
     );
     res.status(500).send();

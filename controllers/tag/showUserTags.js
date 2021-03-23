@@ -42,10 +42,8 @@ module.exports = async (req, res) => {
     }
   } catch (err) {
     console.log(
-      "---------------------------------Error occurred in showUserTags.js---------------------------------"
-    );
-    console.log(err);
-    console.log(
+      "---------------------------------Error occurred in showUserTags.js---------------------------------",
+      err,
       "---------------------------------Error occurred in showUserTags.js---------------------------------"
     );
     res.status(500).send();

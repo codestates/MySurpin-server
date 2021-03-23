@@ -3,21 +3,14 @@ const { Model } = require("sequelize");
 const bcrypt = require("bcrypt");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    updateToken(token) {
-      this.token = bcrypt.hashSync(token, 10);
-    }
     updatePassword(password) {
       this.password = bcrypt.hashSync(password.toString(), 10);
     }
-    updateNickname(nickname) {
-      this.nickname = nickname;
-    }
-
     validPassword(password) {
       return bcrypt.compareSync(password.toString(), this.password);
     }
-    validToken(token) {
-      return bcrypt.compareSync(token, this.token);
+    validGoogleData(googleData) {
+      return bcrypt.compareSync(googleData.toString(), this.googleData);
     }
     /**
      * Helper method for defining associations.
@@ -39,13 +32,16 @@ module.exports = (sequelize, DataTypes) => {
       email: DataTypes.STRING,
       password: DataTypes.STRING,
       nickname: DataTypes.STRING,
+      googleData: DataTypes.STRING,
       token: DataTypes.STRING,
     },
     {
       hooks: {
         beforeCreate: (user) => {
-          user.password = bcrypt.hashSync(user.password.toString(), 10);
-          // user.token = bcrypt.hashSync(user.token, 10);
+          if (user.password !== "" && user.password)
+            user.password = bcrypt.hashSync(user.password.toString(), 10);
+          if (user.googleData)
+            user.googleData = bcrypt.hashSync(user.googleData.toString(), 10);
         },
       },
       instanceMethods: {},
