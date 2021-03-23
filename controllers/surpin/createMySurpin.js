@@ -118,10 +118,8 @@ module.exports = async (req, res) => {
     });
   } catch (err) {
     console.log(
-      "---------------------------------Error occurred in createMySurpin.js---------------------------------"
-    );
-    console.log(err);
-    console.log(
+      "---------------------------------Error occurred in createMySurpin.js---------------------------------",
+      err,
       "---------------------------------Error occurred in createMySurpin.js---------------------------------"
     );
     if (err instanceof errorMessage) {

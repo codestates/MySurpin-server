@@ -22,6 +22,9 @@ module.exports = {
         unique: true,
         type: Sequelize.STRING,
       },
+      googleData: {
+        type: Sequelize.STRING,
+      },
       token: {
         type: Sequelize.STRING,
       },

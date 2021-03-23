@@ -39,10 +39,8 @@ module.exports = async (req, res) => {
     });
   } catch (err) {
     console.log(
-      "---------------------------------Error occurred in showSurpin.js---------------------------------"
-    );
-    console.log(err);
-    console.log(
+      "---------------------------------Error occurred in showSurpin.js---------------------------------",
+      err,
       "---------------------------------Error occurred in showSurpin.js---------------------------------"
     );
     if (err instanceof errorMessage) {
