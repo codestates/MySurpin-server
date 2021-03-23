@@ -9,6 +9,9 @@ module.exports = (sequelize, DataTypes) => {
     validPassword(password) {
       return bcrypt.compareSync(password.toString(), this.password);
     }
+    validGoogleData(googleData) {
+      return bcrypt.compareSync(googleData.toString(), this.googleData);
+    }
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -29,13 +32,16 @@ module.exports = (sequelize, DataTypes) => {
       email: DataTypes.STRING,
       password: DataTypes.STRING,
       nickname: DataTypes.STRING,
+      googleData: DataTypes.STRING,
       token: DataTypes.STRING,
     },
     {
       hooks: {
         beforeCreate: (user) => {
-          user.password = bcrypt.hashSync(user.password.toString(), 10);
-          // user.token = bcrypt.hashSync(user.token, 10);
+          if (user.password !== "" && user.password)
+            user.password = bcrypt.hashSync(user.password.toString(), 10);
+          if (user.googleData)
+            user.googleData = bcrypt.hashSync(user.googleData.toString(), 10);
         },
       },
       instanceMethods: {},

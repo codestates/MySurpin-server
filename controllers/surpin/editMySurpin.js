@@ -48,7 +48,7 @@ module.exports = async (req, res) => {
           title: reqData.listname,
           desc: reqData.desc,
           thumbnail: reqData.thumbnail,
-          updateAt: new Date(),
+          // updateAt: new Date(),
         },
         { transaction: t }
       );
@@ -104,10 +104,8 @@ module.exports = async (req, res) => {
     });
   } catch (err) {
     console.log(
-      "---------------------------------Error occurred in editMySurpin.js---------------------------------"
-    );
-    console.log(err);
-    console.log(
+      "---------------------------------Error occurred in editMySurpin.js---------------------------------",
+      err,
       "---------------------------------Error occurred in editMySurpin.js---------------------------------"
     );
     if (err instanceof errorMessage) {
