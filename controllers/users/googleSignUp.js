@@ -15,6 +15,7 @@ module.exports = async (req, res) => {
         email,
         nickname,
         googleData,
+        password: "",
       });
 
       res.status(200).json({ message: "Successfully processed" });

@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yubin-j/MySurpin-server.git"
+    "url": "git+http://github.com/yubin-j/MySurpin-server.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/yubin-j/MySurpin-server/issues"
+    "url": "http://github.com/yubin-j/MySurpin-server/issues"
   },
-  "homepage": "https://github.com/yubin-j/MySurpin-server#readme",
+  "homepage": "http://github.com/yubin-j/MySurpin-server#readme",
   "dependencies": {
     "axios": "^0.21.1",
     "bcrypt": "^5.0.1",

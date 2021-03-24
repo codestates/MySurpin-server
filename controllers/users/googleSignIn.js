@@ -2,6 +2,7 @@ const { User } = require("../../models");
 const jwt = require("jsonwebtoken");
 
 module.exports = async (req, res) => {
+  console.log(req);
   const { email, googleData } = req;
   const userInfo = await User.findOne({
     where: {
@@ -21,7 +22,7 @@ module.exports = async (req, res) => {
     userInfo.token = accessToken;
     await userInfo.save();
 
-    res.status(200).json({ accessToken, nickname: data.nickname });
+    res.status(200).json({ accessToken, nickname: data.nickname, email });
   } else {
     res.status(401).json({ message: "Invalid user" });
   }

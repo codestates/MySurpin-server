@@ -1,6 +1,7 @@
 const axios = require("axios");
 
 module.exports = (req, res, next) => {
+  console.log(req.body);
   const googleData = req.body.data.split("#")[1].split("&");
 
   let access_token = "";
