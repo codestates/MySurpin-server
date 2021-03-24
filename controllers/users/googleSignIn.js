@@ -21,7 +21,7 @@ module.exports = async (req, res) => {
     userInfo.token = accessToken;
     await userInfo.save();
 
-    res.status(200).json({ accessToken, nickname: data.nickname });
+    res.status(200).json({ accessToken, nickname: data.nickname, email });
   } else {
     res.status(401).json({ message: "Invalid user" });
   }

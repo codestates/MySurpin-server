@@ -34,12 +34,12 @@ module.exports = async (
       { model: User, attributes: [], required: true },
       {
         model: Surpin_Tags,
-        required: true,
+        required: true, //INNER JOIN으로 구성해둬서 태그가 없는 경우 검색되지 않는다.
         attributes: [],
         include: [
           {
             model: Tags,
-            required: true,
+            required: true, //INNER JOIN으로 구성해둬서 태그가 없는 경우 검색되지 않는다.
             attributes: [],
           },
         ],
