@@ -1,4 +1,3 @@
-const { response } = require("express");
 const { SurpinUrls, Surpin, sequelize } = require("../../models");
 const getSrupinFullData = require("../../utils/getSurpinLists");
 
