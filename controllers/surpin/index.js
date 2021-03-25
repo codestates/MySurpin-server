@@ -6,5 +6,6 @@ module.exports = {
   removeMySurpin: require("./removeMySurpin"),
   searchLists: require("./searchLists"),
   showSurpin: require("./showSurpin"),
+  showUrlTitle: require("./showUrlTitle"),
   showUserLists: require("./showUserLists"),
 };

@@ -1,7 +1,6 @@
 const express = require("express");
 const tokenCheckForSurpin = require("../middlewares/tokenCheckForSurpin");
 const router = express.Router();
-
 const controller = require("../controllers/surpin/");
 
 router.post("/newlists", controller.newLists);
