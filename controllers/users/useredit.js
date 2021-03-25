@@ -21,7 +21,7 @@ module.exports = async (req, res) => {
     const accessToken = jwt.sign(
       { nickname: userInfo.nickname },
       process.env.ACCESS_SECRET,
-      { expiresIn: "1H" }
+      { expiresIn: "10H" }
     );
 
     userInfo.token = accessToken;

@@ -3,6 +3,7 @@ const createNewTags = require("../../utils/createNewTags");
 const linkingTagsAndSrupin = require("../../utils/linkingTagsAndSurpin");
 
 module.exports = async (req, res) => {
+  console.log("----------edit surpin-----------");
   const reqData = { ...req.body, ...req.isValid };
   if (!req.isValid) {
     return res.status(400).json({ message: "You are not member" });

@@ -10,11 +10,10 @@ module.exports = async (req, res) => {
 
   if (userInfo && userInfo.validPassword(req.body.password)) {
     const data = userInfo;
-
     const accessToken = jwt.sign(
       { nickname: data.nickname },
       process.env.ACCESS_SECRET,
-      { expiresIn: "1H" }
+      { expiresIn: "10H" }
     );
 
     userInfo.token = accessToken;

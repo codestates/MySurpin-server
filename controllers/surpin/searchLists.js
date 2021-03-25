@@ -2,6 +2,8 @@ const getSrupinLists = require("../../utils/getSurpinLists");
 const { Surpin_Tags, Tags, sequelize, Sequelize } = require("../../models");
 
 module.exports = async (req, res) => {
+  console.log("-------search list---------");
+  console.log(req.body);
   try {
     const { pagenumber, tag } = req.body;
     const offset = ((pagenumber || 1) - 1) * 10;

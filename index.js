@@ -1,9 +1,7 @@
-const https = require("https");
-const fs = require("fs");
 const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-
+const axios = require("axios");
 const app = express();
 
 //express 미들웨어 설정
@@ -11,8 +9,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "https://www.mysurpin.com",
-    methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST", "DELETE", "OPTIONS", "PATCH"],
     credentials: true,
   })
 );
@@ -28,24 +26,28 @@ app.use("/user", userRouter);
 app.use("/surpin", surpinRouter);
 app.use("/tag", tagRouter);
 
-// HTTPS 서버 여는 코드
-const ca = fs.readFileSync(process.env.SSL_CA);
-const key = fs.readFileSync(process.env.SSL_PRIVATE);
-const cert = fs.readFileSync(process.env.SSL_CERT);
+app.listen(4000, () => {
+  console.log("server working now on localhost:4000");
+});
 
-if (ca && key && cert) {
-  https
-    .createServer(
-      {
-        ca,
-        key,
-        cert,
-      },
-      app
-    )
-    .listen(443, () => {
-      console.log("server working now");
-    });
-} else {
-  console.log("key's location is not exists");
-}
+//HTTPS 서버 여는 코드
+// const ca = fs.readFileSync(process.env.SSL_CA);
+// const key = fs.readFileSync(process.env.SSL_PRIVATE);
+// const cert = fs.readFileSync(process.env.SSL_CERT);
+
+// if (ca && key && cert) {
+//   https
+//     .createServer(
+//       {
+//         ca,
+//         key,
+//         cert,
+//       },
+//       app
+//     )
+//     .listen(443, () => {
+//       console.log("server working now");
+//     });
+// } else {
+//   console.log("key's location is not exists");
+// }
