@@ -5,7 +5,7 @@ module.exports = async (req, res) => {
   let errorLocation;
 
   if (!password) {
-    res.status(400).json({ message: "Unsufficient info" });
+    res.status(400).json({ message: "Insufficient info" });
   }
 
   try {

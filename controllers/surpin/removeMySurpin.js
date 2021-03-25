@@ -2,10 +2,10 @@ const { Surpin, sequelize } = require("../../models");
 
 module.exports = async (req, res) => {
   if (!req.isValid) {
-    return res.status(400).json({ message: "You are not member" });
+    return res.status(401).json({ message: "You are not member" });
   }
   if (!req.body.listId) {
-    return res.status(400).json({ message: "Unsufficient info" });
+    return res.status(400).json({ message: "Insufficient info" });
   }
   function errorMessage(message) {
     this.message = message;

@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 module.exports = async (req, res) => {
   const { password, nickname, email } = req.body;
   if (!password && !nickname) {
-    res.status(400).json({ message: "Unsufficient info" });
+    res.status(400).json({ message: "Insufficient info" });
   }
 
   try {

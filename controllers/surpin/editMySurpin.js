@@ -5,7 +5,7 @@ const linkingTagsAndSrupin = require("../../utils/linkingTagsAndSurpin");
 module.exports = async (req, res) => {
   const reqData = { ...req.body, ...req.isValid };
   if (!req.isValid) {
-    return res.status(400).json({ message: "You are not member" });
+    return res.status(401).json({ message: "You are not member" });
   }
 
   if (
@@ -16,10 +16,11 @@ module.exports = async (req, res) => {
     !Array.isArray(reqData.urls) ||
     !Array.isArray(reqData.tags)
   ) {
-    return res.status(400).json({ message: "Unsufficient info" });
+    return res.status(400).json({ message: "Insufficient info" });
   }
 
-  function errorMessage(message) {
+  function errorMessage(code, message) {
+    this.code = code;
     this.message = message;
   }
 
@@ -34,10 +35,10 @@ module.exports = async (req, res) => {
       });
 
       if (targetSurpin === null) {
-        throw new errorMessage("There's no surpin data with given listid");
+        throw new errorMessage(404, "There's no surpin data with given listid");
       }
       if (targetSurpin.userId !== reqData.id) {
-        throw new errorMessage("Unauthorize!!");
+        throw new errorMessage(403, "Permission denied");
       }
 
       //////////////////////////////////////////////////////////////////////////////////////
@@ -78,7 +79,7 @@ module.exports = async (req, res) => {
         }
       });
       if (isUnFormatted || urls.length === 0) {
-        throw new errorMessage("unformatted urls");
+        throw new errorMessage(400, "unformatted urls");
       }
 
       await SurpinUrls.bulkCreate(urls, {
@@ -109,7 +110,7 @@ module.exports = async (req, res) => {
       "---------------------------------Error occurred in editMySurpin.js---------------------------------"
     );
     if (err instanceof errorMessage) {
-      res.status(400).json({ message: err.message });
+      res.status(err.code).json({ message: err.message });
     } else {
       res.status(500).send();
     }

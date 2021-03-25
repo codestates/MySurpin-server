@@ -39,7 +39,7 @@ module.exports = async (req, res) => {
         res.status(400).json({ message: "No surpin with request tag" });
       }
     } else {
-      res.status(400).json({ message: "Unsufficient info" });
+      res.status(400).json({ message: "Insufficient info" });
     }
   } catch (err) {
     console.log(

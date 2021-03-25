@@ -32,10 +32,10 @@ module.exports = async (req, res) => {
     //Already exists user email or nickname
     if (userInfo.email === email) {
       //email
-      res.status(403).json({ message: "Already exists email" });
+      res.status(401).json({ message: "Already exists email" });
     } else {
       //nickname
-      res.status(403).json({ message: "Already exists nickname" });
+      res.status(401).json({ message: "Already exists nickname" });
     }
   }
 };

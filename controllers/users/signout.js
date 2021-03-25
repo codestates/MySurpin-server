@@ -6,12 +6,13 @@ module.exports = async (req, res) => {
         await user.update({ token: null });
       }
     );
-    res.status(200).json({ message: "User authorized" });
+    res.status(200).json({ message: "Successfully signed out" });
   } catch (err) {
     console.log(
       "---------------------------------Error occurred in signout.js---------------------------------",
       err,
       "---------------------------------Error occurred in signout.js---------------------------------"
     );
+    res.status(500).send();
   }
 };

@@ -51,7 +51,7 @@ module.exports = async (req, res, next) => {
         //사용자 정보가 없는 경우 혹은 인증정보가 다른 경우 =>
         //nickname정보를 포함한 토큰을 Bearer를 통해서 보내면서
         //존재하지 않거나 일치하지 않는 email로 요청하는 것은 정상적인 접근으로 보기 어렵기 때문에 거절
-        return res.status(403).json({ message: "Unauthorized" });
+        return res.status(403).json({ message: "Wrong access" });
       }
     } catch (err) {
       switch (err.message) {

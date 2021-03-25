@@ -4,7 +4,7 @@ module.exports = async (req, res) => {
   const { inputText } = req.query;
 
   if (!inputText) {
-    res.status(400).json({ message: "Unsufficient info" });
+    res.status(400).json({ message: "Insufficient info" });
   }
 
   try {

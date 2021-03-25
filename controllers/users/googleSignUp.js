@@ -30,10 +30,10 @@ module.exports = async (req, res) => {
     //Already exists user email or nickname
     if (userInfo.email === email) {
       //email
-      res.status(403).json({ message: "Already exists email" });
+      res.status(401).json({ message: "Already exists email" });
     } else if (userInfo.nickname === nickname) {
       //nickname이 기존 사용자들과 중복될 때 어떻게 해야 하는가?
-      res.status(403).json({ message: "Already exists nickname" });
+      res.status(401).json({ message: "Already exists nickname" });
     } else {
       res.status(403).json({ message: "Already joined your Google Account" });
     }

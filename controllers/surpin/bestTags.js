@@ -13,5 +13,9 @@ module.exports = async (req, res) => {
     limit: 10,
   });
 
-  res.json({ tags: tagInfo });
+  if (tagInfo.length > 0) res.json({ tags: tagInfo });
+  else
+    res.status(404).json({
+      message: "No data in server",
+    });
 };
