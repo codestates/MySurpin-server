@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
   const { needFullData } = req.body;
 
   if (!listId) {
-    return res.status(400).json({ message: "Unsufficient info" });
+    return res.status(400).json({ message: "Insufficient info" });
   }
   function errorMessage(message) {
     this.message = message;

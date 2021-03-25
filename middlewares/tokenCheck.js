@@ -9,7 +9,7 @@ module.exports = async (req, res, next) => {
     return res.status(400).json({ message: "Token is not exists!" });
   }
   if (!email) {
-    return res.status(400).json({ message: "Unsufficient info" });
+    return res.status(400).json({ message: "Insufficient info" });
   }
 
   const bearer = authorization.split(" ");
@@ -43,7 +43,7 @@ module.exports = async (req, res, next) => {
       } else if (userInfo.token !== bearer[1]) {
         return res.status(403).json({ message: "Expired token" });
       } else {
-        return res.status(403).json({ message: "Unauthorized" });
+        return res.status(403).json({ message: "Wrong access" });
       }
     } catch (err) {
       switch (err.message) {

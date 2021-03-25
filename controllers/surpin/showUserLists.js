@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
     const offset = ((pagenumber || 1) - 1) * 10;
 
     if (!nickname) {
-      res.status(400).json({ message: "Unsufficient info" });
+      res.status(400).json({ message: "Insufficient info" });
     }
 
     //요청한 사용자가 있는지 확인
@@ -49,7 +49,7 @@ module.exports = async (req, res) => {
             [Sequelize.Op.in]: target[0].dataValues.surpinIDs,
           };
         } else {
-          res.status(400).json({ message: "wrong tag name!" });
+          res.status(404).json({ message: "wrong tag name!" });
           return;
         }
       }

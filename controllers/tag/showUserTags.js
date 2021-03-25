@@ -5,7 +5,7 @@ module.exports = async (req, res) => {
     const { nickname } = req.query;
 
     if (!nickname) {
-      res.status(400).json({ message: "Unsufficient info" });
+      res.status(400).json({ message: "Insufficient info" });
     }
 
     //요청한 사용자가 있는지 확인
