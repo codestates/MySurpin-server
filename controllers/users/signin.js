@@ -8,6 +8,9 @@ module.exports = async (req, res) => {
     },
   });
 
+  if (!req.body.password)
+    return res.status(400).json({ message: "Insufficient info" });
+
   if (userInfo && userInfo.validPassword(req.body.password)) {
     const data = userInfo;
 
